@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>etwdiff Report</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f4f9; color: #333; margin: 0; padding: 20px; }
+        h1, h2, h3 { color: #2c3e50; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .trs-box { background: #ecf0f1; padding: 15px; border-left: 5px solid #e74c3c; font-size: 1.2em; margin-bottom: 20px; }
+        .metrics-card { display: inline-block; width: 48%; margin-right: 2%; vertical-align: top; }
+        .metrics-card:last-child { margin-right: 0; }
+        .metric-val { font-weight: bold; color: #2980b9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ETW Telemetry Degradation Report</h1>
+        
+        <div class="trs-box">
+            <strong>Telemetry Resilience Score (TRS):</strong> <span style="color: #e74c3c; font-weight: bold;">0.7414</span>
+        </div>
+
+        <div>
+            <div class="metrics-card">
+                <h2>Baseline Metrics</h2>
+                <ul>
+                    <li>Volume (F): <span class="metric-val">15533</span></li>
+                    <li>Entropy (H): <span class="metric-val">1.6476 bits</span></li>
+                    <li>Timing Var (CV_t): <span class="metric-val">9.7841</span></li>
+                </ul>
+            </div>
+            
+            <div class="metrics-card">
+                <h2>Mutated Metrics</h2>
+                <ul>
+                    <li>Volume (F): <span class="metric-val">34549</span></li>
+                    <li>Entropy (H): <span class="metric-val">1.3718 bits</span></li>
+                    <li>Timing Var (CV_t): <span class="metric-val">173.3677</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Analysis</h2>
+        <p>Provider Visibility Reduction: <strong>0.00%</strong></p>
+        
+        <h3>Missing Event Types</h3>
+        <ul>
+            <li><em>None</em></li>
+        </ul>
+    </div>
+</body>
+</html>
