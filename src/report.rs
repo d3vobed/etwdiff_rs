@@ -16,6 +16,7 @@ pub struct JsonMetrics {
 pub struct JsonAnalysis {
     pub missing_events: Vec<String>,
     pub provider_reduction_pct: f64,
+    pub evasion_categories: std::collections::HashMap<String, Vec<String>>,
 }
 
 #[derive(Serialize)]
@@ -57,6 +58,13 @@ pub fn print_terminal_summary(
         }
     }
     println!("  Provider Reduction : {:.2}%", analysis.provider_reduction_pct);
+    
+    println!("\n  [ Evasion Layer Breakdown ]");
+    for (category, events) in &analysis.evasion_categories {
+        if !events.is_empty() {
+            println!("    - {}: {} events", category, events.len());
+        }
+    }
     
     println!("\n{:-<60}", "");
     println!(" TELEMETRY RESILIENCE SCORE (TRS): {:.4}", analysis.trs);

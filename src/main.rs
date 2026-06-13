@@ -104,6 +104,7 @@ fn main() {
         analysis: JsonAnalysis {
             missing_events: analysis_res.missing_events.clone(),
             provider_reduction_pct: analysis_res.provider_reduction_pct,
+            evasion_categories: analysis_res.evasion_categories.clone(),
         },
         trs: analysis_res.trs,
     };

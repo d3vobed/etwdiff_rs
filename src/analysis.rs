@@ -5,6 +5,7 @@ use crate::metrics::Metrics;
 pub struct AnalysisResult {
     pub missing_events: Vec<String>,
     pub provider_reduction_pct: f64,
+    pub evasion_categories: std::collections::HashMap<String, Vec<String>>,
     pub trs: f64,
 }
 
@@ -66,9 +67,29 @@ pub fn analyze(
     let mut trs = w_vol * vol_ratio + w_ent * ent_ratio + w_time * timing_cmp;
     trs = trs.max(0.0).min(1.0);
     
+    let mut evasion_categories = std::collections::HashMap::new();
+    let mut direct_syscall = Vec::new();
+    let mut kernel_hwbp = Vec::new();
+    let mut general_loss = Vec::new();
+    
+    for ev in &missing_events {
+        if ev.contains("API") || ev.contains("User") {
+            direct_syscall.push(ev.clone());
+        } else if ev.contains("Kernel") {
+            kernel_hwbp.push(ev.clone());
+        } else {
+            general_loss.push(ev.clone());
+        }
+    }
+    
+    evasion_categories.insert("Direct Syscall Evasion".to_string(), direct_syscall);
+    evasion_categories.insert("Kernel Evasion (HWBP)".to_string(), kernel_hwbp);
+    evasion_categories.insert("General Telemetry Loss".to_string(), general_loss);
+
     AnalysisResult {
         missing_events,
         provider_reduction_pct,
+        evasion_categories,
         trs,
     }
 }
